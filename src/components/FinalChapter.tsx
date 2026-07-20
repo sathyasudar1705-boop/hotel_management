@@ -63,7 +63,7 @@ export default function FinalChapter() {
   const partners = ["THE SAVOY", "ANANTARA", "AMAN", "ONE&ONLY", "BELMOND"];
 
   return (
-    <div className="relative w-full bg-luxury-navy overflow-hidden z-10 py-24 flex flex-col justify-between">
+    <div className="relative w-full bg-soft-sand overflow-hidden z-10 py-24 flex flex-col justify-between">
       
       {/* 1. Cinematic Full-Screen Background Backdrop */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -73,9 +73,9 @@ export default function FinalChapter() {
           transition={{ duration: 30, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
           src="/luxury_lobby_1784286683995.png" 
           alt="Grand Hotel Lobby Closing scene"
-          className="w-full h-full object-cover brightness-[0.22]"
+          className="w-full h-full object-cover brightness-[0.92]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-luxury-navy via-luxury-navy/40 to-luxury-navy z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-soft-sand/80 via-transparent to-soft-sand/90 z-10" />
       </div>
 
       <div className="w-full max-w-7xl mx-auto px-6 md:px-20 relative z-20 space-y-24">
@@ -85,11 +85,11 @@ export default function FinalChapter() {
           <span className="text-xs tracking-[0.25em] font-semibold text-gold-base uppercase block">
             Proven Performance
           </span>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif font-light text-white leading-tight">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif font-light text-charcoal leading-tight">
             Trusted by Luxury Hotels. <br />
-            <span className="italic text-gold-light font-light">Powered by Intelligent Hospitality.</span>
+            <span className="italic text-gold-base font-light">Powered by Intelligent Hospitality.</span>
           </h2>
-          <p className="text-white/60 font-sans text-sm md:text-base leading-relaxed font-light">
+          <p className="text-warm-gray font-sans text-sm md:text-base leading-relaxed font-light">
             Luxury hotels choose our AI Concierge Platform to deliver unforgettable guest experiences with intelligent automation and world-class service.
           </p>
         </div>
@@ -104,8 +104,8 @@ export default function FinalChapter() {
             { label: "Availability", val: 24, suffix: "/7", text: "Live Concierge" },
             { label: "Satisfaction", val: 98, suffix: "%", text: "Guest Experience" }
           ].map((metric, idx) => (
-            <div key={idx} className="glass-panel p-5 rounded-2xl border border-white/5 text-center flex flex-col justify-between">
-              <span className="text-[9px] uppercase tracking-widest text-white/40 font-bold block mb-2">
+            <div key={idx} className="bg-white p-5 rounded-2xl border border-border-beige shadow-[0_4px_20px_rgba(43,43,43,0.06)] text-center flex flex-col justify-between">
+              <span className="text-[9px] uppercase tracking-widest text-warm-gray/60 font-bold block mb-2">
                 {metric.label}
               </span>
               <h3 className="text-2xl sm:text-3xl font-display font-bold text-gold-base font-sans">
@@ -117,7 +117,7 @@ export default function FinalChapter() {
                   <Counter value={metric.val} suffix={metric.suffix} />
                 )}
               </h3>
-              <p className="text-[10px] text-white/50 mt-1 font-light">{metric.text}</p>
+              <p className="text-[10px] text-warm-gray mt-1 font-light">{metric.text}</p>
             </div>
           ))}
         </div>
@@ -134,30 +134,30 @@ export default function FinalChapter() {
                 ease: "easeInOut",
                 delay: idx * 0.5 
               }}
-              className="glass-panel p-6 rounded-2xl border border-white/10 shadow-2xl flex flex-col justify-between hover:border-gold-base/30 transition-colors duration-500 text-left min-h-[220px]"
+              className="bg-white p-6 rounded-2xl border border-border-beige shadow-[0_4px_20px_rgba(43,43,43,0.06)] flex flex-col justify-between hover:border-gold-base/30 transition-colors duration-500 text-left min-h-[220px] hover:shadow-[0_8px_30px_rgba(205,170,109,0.12)]"
             >
               <div className="flex items-center gap-1.5 text-gold-base mb-4">
                 {[...Array(card.rating)].map((_, i) => (
                   <Star key={i} className="w-3.5 h-3.5 fill-gold-base text-gold-base" />
                 ))}
               </div>
-              <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-light italic font-sans flex-1">
+              <p className="text-xs sm:text-sm text-charcoal/80 leading-relaxed font-light italic font-sans flex-1">
                 "{card.quote}"
               </p>
-              <div className="border-t border-white/5 pt-4 mt-4">
-                <h4 className="text-xs font-semibold text-white">{card.author}</h4>
-                <p className="text-[10px] text-white/40 font-sans mt-0.5">{card.hotel}</p>
+              <div className="border-t border-border-beige pt-4 mt-4">
+                <h4 className="text-xs font-semibold text-charcoal">{card.author}</h4>
+                <p className="text-[10px] text-warm-gray font-sans mt-0.5">{card.hotel}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
         {/* 5. Elegant Client Logos Lineup */}
-        <div className="border-y border-white/5 py-8 flex flex-wrap justify-center items-center gap-8 md:gap-16">
+        <div className="border-y border-border-beige py-8 flex flex-wrap justify-center items-center gap-8 md:gap-16">
           {partners.map((partner, idx) => (
             <span 
               key={idx}
-              className="text-[10px] font-serif tracking-[0.3em] font-semibold text-white/40 hover:text-white/90 hover:scale-105 transition-all duration-500 cursor-default"
+              className="text-[10px] font-serif tracking-[0.3em] font-semibold text-charcoal/35 hover:text-charcoal transition-all duration-500 cursor-default"
             >
               {partner}
             </span>
@@ -166,11 +166,11 @@ export default function FinalChapter() {
 
         {/* 6. Breathtaking Final Call-To-Action */}
         <div className="text-center max-w-4xl mx-auto space-y-8 pt-6">
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif font-light text-white leading-tight">
+          <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif font-light text-charcoal leading-tight">
             Every Exceptional Stay <br />
-            Begins With <span className="italic text-gold-light font-light">Intelligent Hospitality.</span>
+            Begins With <span className="italic text-gold-base font-light">Intelligent Hospitality.</span>
           </h2>
-          <p className="text-white/60 font-sans text-sm md:text-base leading-relaxed max-w-xl mx-auto font-light">
+          <p className="text-warm-gray font-sans text-sm md:text-base leading-relaxed max-w-xl mx-auto font-light">
             Experience the future of luxury hotel management with an AI Concierge designed to elevate every guest journey.
           </p>
           
@@ -178,7 +178,7 @@ export default function FinalChapter() {
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto bg-gold-base hover:bg-gold-light text-luxury-navy px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest flex items-center justify-center space-x-3 transition-colors duration-500 shadow-[0_0_30px_rgba(197,168,128,0.2)] cursor-pointer"
+              className="w-full sm:w-auto bg-gradient-to-r from-gold-base to-gold-dark hover:brightness-110 text-white px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest flex items-center justify-center space-x-3 transition-all duration-300 shadow-[0_8px_25px_rgba(205,170,109,0.25)] cursor-pointer"
             >
               <span>Start AI Concierge</span>
               <ArrowRight className="w-4 h-4" />
@@ -187,20 +187,20 @@ export default function FinalChapter() {
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto bg-transparent hover:bg-white/5 text-white border border-white/15 px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest flex items-center justify-center space-x-3 transition-all duration-300 cursor-pointer"
+              className="w-full sm:w-auto bg-white hover:bg-soft-sand text-charcoal border border-border-beige px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest flex items-center justify-center space-x-3 transition-all duration-300 cursor-pointer shadow-[0_4px_15px_rgba(43,43,43,0.06)]"
             >
               <span>Book a Live Demo</span>
-              <ArrowUpRight className="w-4 h-4 text-white/60" />
+              <ArrowUpRight className="w-4 h-4 text-warm-gray" />
             </motion.button>
           </div>
         </div>
 
         {/* 7. Premium Minimal Footer */}
-        <footer className="border-t border-white/5 pt-16 mt-16 text-left space-y-12">
+        <footer className="border-t border-border-beige pt-16 mt-16 text-left space-y-12">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             <div className="col-span-2 space-y-4">
-              <h4 className="logo-serif text-white font-bold text-lg">Grand Portal</h4>
-              <p className="text-[11px] text-white/50 leading-relaxed font-light max-w-xs">
+              <h4 className="logo-serif text-charcoal font-bold text-lg">Grand Portal</h4>
+              <p className="text-[11px] text-warm-gray leading-relaxed font-light max-w-xs">
                 The world's leading intelligence engine crafted exclusively for five-star hospitality brands, luxury suites, and private resorts.
               </p>
               
@@ -209,13 +209,13 @@ export default function FinalChapter() {
                 <span className="text-[9px] uppercase tracking-widest text-gold-base font-bold block mb-2">
                   Subscribe to updates
                 </span>
-                <div className="flex max-w-sm rounded-full overflow-hidden border border-white/10 bg-white/5 p-1">
+                <div className="flex max-w-sm rounded-full overflow-hidden border border-border-beige bg-white p-1">
                   <input 
                     type="email" 
                     placeholder="Enter your email" 
-                    className="flex-1 bg-transparent px-4 py-2 text-xs text-white placeholder-white/30 focus:outline-none"
+                    className="flex-1 bg-transparent px-4 py-2 text-xs text-charcoal placeholder-warm-gray/50 focus:outline-none"
                   />
-                  <button className="bg-gold-base hover:bg-gold-light text-luxury-navy w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300">
+                  <button className="bg-gold-base hover:bg-gold-dark text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300">
                     <Mail className="w-4 h-4" />
                   </button>
                 </div>
@@ -240,10 +240,10 @@ export default function FinalChapter() {
                 <h4 className="text-[10px] uppercase tracking-widest text-gold-base font-bold">
                   {col.title}
                 </h4>
-                <ul className="space-y-2 text-xs font-light text-white/50">
+                <ul className="space-y-2 text-xs font-light text-warm-gray">
                   {col.links.map((link, lIdx) => (
                     <li key={lIdx}>
-                      <a href="#" className="hover:text-white transition-colors duration-300">
+                      <a href="#" className="hover:text-charcoal transition-colors duration-300">
                         {link}
                       </a>
                     </li>
@@ -253,11 +253,11 @@ export default function FinalChapter() {
             ))}
           </div>
 
-          <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-white/30 gap-4">
+          <div className="border-t border-border-beige pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-warm-gray/50 gap-4">
             <div className="flex space-x-6">
-              <a href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors duration-300">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors duration-300">PCI Compliance</a>
+              <a href="#" className="hover:text-charcoal transition-colors duration-300">Privacy Policy</a>
+              <a href="#" className="hover:text-charcoal transition-colors duration-300">Terms of Service</a>
+              <a href="#" className="hover:text-charcoal transition-colors duration-300">PCI Compliance</a>
             </div>
             <div>
               <span>© 2026 MONALISA RESORTS. ALL RIGHTS RESERVED.</span>

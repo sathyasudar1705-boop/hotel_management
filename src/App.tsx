@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { motion } from 'framer-motion';
-import { Sparkles, Play, ArrowRight, Star, CalendarDays, Volume2, VolumeX } from 'lucide-react';
+
+import { Sparkles, ArrowRight } from 'lucide-react';
 import ConciergeJourney from './components/ConciergeJourney';
 import ServiceShowcase from './components/ServiceShowcase';
 import FinalChapter from './components/FinalChapter';
@@ -15,22 +15,16 @@ export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
-  const orbRef = useRef<HTMLDivElement>(null);
-  const card1Ref = useRef<HTMLDivElement>(null);
-  const card2Ref = useRef<HTMLDivElement>(null);
-  const card3Ref = useRef<HTMLDivElement>(null);
 
-  const [isPlayingVoice, setIsPlayingVoice] = useState(true);
-  const [showNotification, setShowNotification] = useState(false);
-  const [notificationText, setNotificationText] = useState("");
+  const [bookingForm, setBookingForm] = useState({ email: '', password: '' });
 
-  // Dialogue lines for the AI Concierge simulator
-  const conciergePhrases = [
-    "Welcome to the Grand Hotel. I am your AI concierge.",
-    "I can schedule your spa session at 4 PM today.",
-    "Would you like me to book a seaside dinner at 7 PM?",
-    "Confirming your Luxury Suite 101 booking. Confirmation sent."
-  ];
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBookingForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleBooking = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
 
   useEffect(() => {
     // 1. Initialize Lenis Smooth Scroll
@@ -63,7 +57,7 @@ export default function App() {
         }
       });
 
-      // Content scroll parallax/fade
+      // Floating elements scroll parallax
       gsap.to(heroContentRef.current, {
         y: -100,
         opacity: 0,
@@ -71,52 +65,6 @@ export default function App() {
           trigger: containerRef.current,
           start: "top top",
           end: "50% top",
-          scrub: true,
-        }
-      });
-
-      // Floating elements scroll parallax
-      gsap.to(orbRef.current, {
-        y: -150,
-        x: 50,
-        opacity: 0.1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "80% top",
-          scrub: true,
-        }
-      });
-
-      gsap.to(card1Ref.current, {
-        y: -250,
-        x: -50,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        }
-      });
-
-      gsap.to(card2Ref.current, {
-        y: -180,
-        x: 60,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        }
-      });
-
-      gsap.to(card3Ref.current, {
-        y: -300,
-        x: -80,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
           scrub: true,
         }
       });
@@ -148,44 +96,7 @@ export default function App() {
       '-=0.6'
     );
 
-    tl.fromTo(orbRef.current, 
-      { scale: 0, opacity: 0 }, 
-      { scale: 1, opacity: 1, duration: 1.8, ease: 'back.out(1.2)' },
-      '-=1.2'
-    );
 
-    tl.fromTo(['.float-card'], 
-      { opacity: 0, scale: 0.8, y: 50 }, 
-      { opacity: 1, scale: 1, y: 0, duration: 1.5, stagger: 0.2, ease: 'power3.out' },
-      '-=1'
-    );
-
-    // 4. Mouse movement parallax event
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const xPos = (clientX / window.innerWidth - 0.5) * 2; // -1 to 1
-      const yPos = (clientY / window.innerHeight - 0.5) * 2;
-
-      // Subtle translations for 3D depth
-      gsap.to(orbRef.current, { x: xPos * 25, y: yPos * 25, duration: 0.8 });
-      gsap.to(card1Ref.current, { x: xPos * 40 + 20, y: yPos * 40 - 20, duration: 1 });
-      gsap.to(card2Ref.current, { x: xPos * 30 - 30, y: yPos * 30 + 10, duration: 1.2 });
-      gsap.to(card3Ref.current, { x: xPos * 50 + 10, y: yPos * 50 - 40, duration: 1.1 });
-      gsap.to(heroContentRef.current, { x: xPos * 10, y: yPos * 10, duration: 0.6 });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    // 5. Speak simulation loop
-    let textIndex = 0;
-    const voiceInterval = setInterval(() => {
-      if (isPlayingVoice) {
-        setNotificationText(conciergePhrases[textIndex]);
-        setShowNotification(true);
-        setTimeout(() => setShowNotification(false), 4500);
-        textIndex = (textIndex + 1) % conciergePhrases.length;
-      }
-    }, 6500);
 
     const refreshTimeout = setTimeout(() => {
       ScrollTrigger.refresh();
@@ -194,12 +105,10 @@ export default function App() {
     return () => {
       lenis.destroy();
       ctx.revert();
-      window.removeEventListener('mousemove', handleMouseMove);
-      clearInterval(voiceInterval);
       clearTimeout(refreshTimeout);
       gsap.ticker.remove(tick);
     };
-  }, [isPlayingVoice]);
+  }, []);
 
   return (
     <div 
@@ -209,201 +118,163 @@ export default function App() {
       {/* Floating Pill Navbar */}
       <Navbar />
       {/* Background with layered Ken Burns & Environmental sunlight filter */}
-      <div className="fixed inset-0 w-full h-screen overflow-hidden pointer-events-none z-0">
+      <div className="fixed inset-0 w-full h-screen overflow-hidden pointer-events-none z-0 bg-warm-white">
         <div 
           ref={bgRef}
-          className="absolute inset-0 w-full h-full bg-cover bg-center origin-center filter brightness-[0.8]"
-          style={{ backgroundImage: `url('/media__1784531917027.jpg')` }}
+          className="absolute inset-0 w-full h-full bg-cover origin-center filter brightness-[1.0]"
+          style={{ backgroundImage: `url('/media__1784531917027.jpg')`, backgroundPosition: 'center 20%' }}
         />
         {/* Soft Golden Sunset overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-luxury-navy/55 via-luxury-navy/15 to-transparent z-1" />
-        <div className="absolute inset-0 bg-radial-gradient(circle at 70% 30%, rgba(197, 168, 128, 0.1) 0%, transparent 60%) z-1" />
+        <div className="absolute inset-0 bg-gradient-to-t from-warm-white/70 via-transparent to-transparent z-1" />
+        <div className="absolute inset-0 bg-radial-gradient(circle at 70% 30%, rgba(205, 170, 109, 0.15) 0%, transparent 60%) z-1" />
         {/* Living atmospheric particles */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-40 z-1 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold-base/5 via-transparent to-transparent opacity-40 z-1 pointer-events-none" />
       </div>
 
       {/* Fullscreen Hero Section */}
-      <section className="relative w-full h-screen flex items-center px-6 md:px-20 z-10 pt-28">
+      <section className="relative w-full h-screen flex items-center px-6 md:px-20 z-10 pt-20 md:pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center w-full max-w-7xl mx-auto">
           
           {/* Left Column: Premium Editorial Typography & CTAs */}
           <div 
             ref={heroContentRef} 
-            className="lg:col-span-7 flex flex-col items-start text-left space-y-4 md:space-y-5 select-none"
+            className="lg:col-span-7 flex flex-col items-start text-left space-y-4 md:space-y-5"
           >
 
 
             {/* Main Headline */}
-            <div className="flex flex-col space-y-0.5">
+            <div className="flex flex-col space-y-0">
               <div className="overflow-hidden">
-                <h1 className="reveal-line text-2xl sm:text-4xl md:text-[3.4rem] font-display font-bold leading-[1.05] tracking-tight uppercase text-white">
+                <h1 className="reveal-line text-2xl sm:text-3xl md:text-[2.8rem] font-sans font-extrabold leading-tight tracking-tight uppercase"
+                  style={{ color: '#111111', textShadow: '0 1px 8px rgba(255,255,255,0.8)' }}>
                   Experience
                 </h1>
               </div>
               <div className="overflow-hidden">
-                <h1 className="reveal-line text-2xl sm:text-4xl md:text-[3.4rem] font-serif font-light italic leading-[1.05] tracking-tight text-gold-light">
+                <h1 className="reveal-line text-2xl sm:text-3xl md:text-[2.8rem] font-serif font-semibold italic leading-tight tracking-tight"
+                  style={{ color: '#A07020', textShadow: '0 1px 8px rgba(255,255,255,0.8)' }}>
                   Luxury
                 </h1>
               </div>
               <div className="overflow-hidden">
-                <h1 className="reveal-line text-2xl sm:text-4xl md:text-[3.4rem] font-display font-bold leading-[1.05] tracking-tight uppercase text-white">
+                <h1 className="reveal-line text-2xl sm:text-3xl md:text-[2.8rem] font-sans font-extrabold leading-tight tracking-tight uppercase"
+                  style={{ color: '#111111', textShadow: '0 1px 8px rgba(255,255,255,0.8)' }}>
                   Where Elegance
                 </h1>
               </div>
               <div className="overflow-hidden">
-                <h1 className="reveal-line text-2xl sm:text-4xl md:text-[3.4rem] font-serif font-light italic leading-[1.05] tracking-tight text-gold-light">
+                <h1 className="reveal-line text-2xl sm:text-3xl md:text-[2.8rem] font-serif font-semibold italic leading-tight tracking-tight"
+                  style={{ color: '#A07020', textShadow: '0 1px 8px rgba(255,255,255,0.8)' }}>
                   Meets Innovation
                 </h1>
               </div>
             </div>
 
             {/* Description */}
-            <p className="reveal-desc text-white/70 font-sans text-xs md:text-sm leading-relaxed max-w-md font-light mt-4 md:mt-5">
+            <p className="reveal-desc font-sans text-xs md:text-sm leading-relaxed max-w-xs font-medium mt-3"
+              style={{ color: '#222222', textShadow: '0 1px 6px rgba(255,255,255,0.9)' }}>
               Your personal AI concierge awaits. From fine dining reservations to spa bookings, experience world-class hospitality powered by intelligent automation.
             </p>
 
             {/* Premium Interactive Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-6 md:pt-8">
-              <button className="reveal-btn relative overflow-hidden group px-5 py-2.5 bg-white text-luxury-navy font-bold font-sans text-[10px] tracking-wider uppercase rounded-full shadow-lg transition-all duration-500 hover:text-white hover:bg-transparent">
-                {/* Glowing border outline */}
-                <span className="absolute inset-0 border border-white rounded-full group-hover:scale-100 scale-95 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                <span className="absolute inset-0 bg-gradient-to-r from-gold-base to-gold-dark opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-1" />
+              <button className="reveal-btn relative overflow-hidden group px-5 py-2.5 bg-gradient-to-r from-gold-base to-gold-dark text-white font-bold font-sans text-[10px] tracking-wider uppercase rounded-full shadow-md transition-all duration-500 hover:brightness-110 cursor-pointer">
                 <span className="relative z-10 flex items-center space-x-1.5">
-                  <span>Start AI Concierge</span>
+                  <span>Explore Hotel</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform duration-500 group-hover:translate-x-1" />
                 </span>
               </button>
 
-              <button className="reveal-btn relative overflow-hidden group px-5 py-2.5 glass-panel text-white font-semibold font-sans text-[10px] tracking-wider uppercase rounded-full transition-all duration-500 hover:bg-white/10">
+              <button className="reveal-btn relative overflow-hidden group px-5 py-2.5 bg-white border border-border-beige text-charcoal font-semibold font-sans text-[10px] tracking-wider uppercase rounded-full transition-all duration-500 hover:bg-soft-sand/40 cursor-pointer">
                 <span className="relative z-10 flex items-center space-x-1.5">
-                  <Play className="w-3 h-3 fill-white" />
-                  <span>Watch Experience</span>
+                  <Sparkles className="w-3 h-3 text-gold-base" />
+                  <span>AI Concierge</span>
                 </span>
               </button>
             </div>
           </div>
 
-          {/* Right Column: AI Concierge Breathing Orb & Drifting Cards */}
-          <div className="lg:col-span-5 relative w-full h-[280px] lg:h-[400px] flex items-center justify-center">
-            
-            {/* The Elegant AI Concierge Orb */}
-            <div 
-              ref={orbRef}
-              className="relative w-48 h-48 md:w-60 md:h-60 rounded-full flex items-center justify-center z-10 select-none cursor-pointer"
-              onClick={() => setIsPlayingVoice(!isPlayingVoice)}
-            >
-              {/* Radial Blur Glowing Rings */}
-              <div className="absolute inset-0 rounded-full bg-radial-gradient(circle, rgba(197, 168, 128, 0.15) 0%, rgba(14, 22, 36, 0.3) 60%, transparent 100%)" />
-              <div className="absolute inset-0 rounded-full border border-gold-base/15 animate-[spin_60s_linear_infinite]" />
-              <div className="absolute inset-8 rounded-full border border-dashed border-white/5 animate-[spin_40s_linear_infinite_reverse]" />
-              
-              {/* Central Glowing Capsule/Sphere */}
-              <div className="absolute w-28 h-28 md:w-36 md:h-36 rounded-full bg-gradient-to-br from-luxury-blue/90 to-luxury-navy/95 border border-white/10 shadow-[0_0_40px_rgba(197,168,128,0.12)] flex items-center justify-center group overflow-hidden">
-                {/* Breathing Inner Radial Core */}
-                <div className="absolute inset-3 rounded-full bg-radial-gradient(circle, rgba(197, 168, 128, 0.2) 0%, transparent 70%) animate-[pulse_4s_ease-in-out_infinite]" />
-                
-                {/* Live sound waveform bars */}
-                <div className="flex items-center gap-1 z-10 h-6">
-                  {[0.5, 0.8, 1.2, 0.7, 1.5, 0.9, 1.3, 0.6, 1.0].map((val, i) => (
-                    <span 
-                      key={i}
-                      className="w-0.5 rounded-full bg-gradient-to-t from-gold-base to-gold-light opacity-80"
-                      style={{
-                        height: `${val * 16}px`,
-                        animation: isPlayingVoice 
-                          ? `wave 1.${i + 3}s ease-in-out infinite alternate`
-                          : 'none',
-                        transformOrigin: 'center'
-                      }}
-                    />
-                  ))}
+          {/* Right Column: Login Card */}
+          <div className="lg:col-span-5 relative w-full flex items-center justify-center lg:justify-end">
+            <div className="w-full max-w-xs bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_16px_48px_rgba(43,43,43,0.11)] border border-border-beige overflow-hidden">
+
+              {/* Header */}
+              <div className="px-6 pt-7 pb-5 border-b border-border-beige">
+                <h2 className="text-lg font-serif font-light text-charcoal leading-snug">Welcome</h2>
+                <p className="text-[11px] text-warm-gray mt-1.5 leading-relaxed font-sans font-light">
+                  Sign in to access your personal concierge and manage your stay.
+                </p>
+              </div>
+
+              {/* Form */}
+              <form onSubmit={handleBooking} className="px-6 py-5 space-y-3.5">
+
+                {/* Email */}
+                <div className="space-y-1.5">
+                  <label className="text-[9px] uppercase tracking-widest text-charcoal/60 font-bold font-sans block">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={bookingForm.email}
+                    onChange={handleFormChange}
+                    placeholder="your.email@example.com"
+                    required
+                    className="w-full px-3.5 py-2.5 text-xs text-charcoal placeholder-warm-gray/50
+                               bg-soft-sand/30 border border-border-beige rounded-lg
+                               focus:outline-none focus:border-gold-base/50 focus:bg-white
+                               transition-all duration-300 font-sans"
+                  />
                 </div>
 
-                {/* Voice toggle button */}
-                <div className="absolute bottom-3 z-10 text-[8px] uppercase tracking-widest text-gold-base font-semibold flex items-center gap-1 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
-                  {isPlayingVoice ? (
-                    <>
-                      <Volume2 className="w-2.5 h-2.5" />
-                      <span>Live Concierge</span>
-                    </>
-                  ) : (
-                    <>
-                      <VolumeX className="w-2.5 h-2.5 text-white/40" />
-                      <span className="text-white/40">Muted</span>
-                    </>
-                  )}
+                {/* Password */}
+                <div className="space-y-1.5">
+                  <label className="text-[9px] uppercase tracking-widest text-charcoal/60 font-bold font-sans block">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                    className="w-full px-3.5 py-2.5 text-xs text-charcoal placeholder-warm-gray/50
+                               bg-soft-sand/30 border border-border-beige rounded-lg
+                               focus:outline-none focus:border-gold-base/50 focus:bg-white
+                               transition-all duration-300 font-sans"
+                  />
                 </div>
-              </div>
-            </div>
 
-            {/* Drifting Premium Card 1: 24/7 AI Concierge */}
-            <div 
-              ref={card1Ref}
-              className="float-card absolute top-12 left-4 md:left-0 z-20 glass-panel px-4 py-3 rounded-xl flex items-center space-x-2.5 shadow-lg select-none border border-white/10 hover:border-gold-base/30 transition-colors duration-500 scale-90"
-            >
-              <div className="w-8 h-8 rounded-full bg-gold-base/10 flex items-center justify-center text-gold-base">
-                <Sparkles className="w-3.5 h-3.5" />
-              </div>
-              <div className="text-left">
-                <p className="text-[8px] tracking-wider uppercase text-gold-base font-bold">Intelligence</p>
-                <h4 className="text-[10px] font-semibold text-white font-sans">24/7 AI Concierge</h4>
-              </div>
-            </div>
+                {/* Sign In Button */}
+                <button
+                  type="submit"
+                  className="w-full py-2.5 bg-gradient-to-r from-gold-base to-gold-dark
+                             hover:brightness-110 text-white font-bold text-[10px] uppercase
+                             tracking-[0.18em] rounded-lg transition-all duration-300
+                             shadow-[0_4px_16px_rgba(205,170,109,0.28)] cursor-pointer font-sans mt-1"
+                >
+                  Sign In
+                </button>
+              </form>
 
-            {/* Drifting Premium Card 2: 5 Stars Service */}
-            <div 
-              ref={card2Ref}
-              className="float-card absolute bottom-16 right-4 md:right-0 z-20 glass-panel px-4 py-3 rounded-xl flex items-center space-x-2.5 shadow-lg select-none border border-white/10 hover:border-gold-base/30 transition-colors duration-500 scale-90"
-            >
-              <div className="w-8 h-8 rounded-full bg-gold-base/10 flex items-center justify-center text-gold-base">
-                <Star className="w-3.5 h-3.5 fill-gold-base text-gold-base" />
+              {/* Footer */}
+              <div className="px-6 pb-5 text-center">
+                <p className="text-[8px] text-warm-gray/50 font-sans">
+                  © 2025 Grand Hotel Da Nang &nbsp;·&nbsp; All rights reserved
+                </p>
               </div>
-              <div className="text-left">
-                <p className="text-[8px] tracking-wider uppercase text-gold-base font-bold">Standard</p>
-                <h4 className="text-[10px] font-semibold text-white font-sans">★★★★★ Luxury Service</h4>
-              </div>
-            </div>
 
-            {/* Drifting Premium Card 3: Instant Bookings */}
-            <div 
-              ref={card3Ref}
-              className="float-card absolute bottom-20 left-8 md:left-2 z-20 glass-panel px-4 py-3 rounded-xl flex items-center space-x-2.5 shadow-lg select-none border border-white/10 hover:border-gold-base/30 transition-colors duration-500 scale-90"
-            >
-              <div className="w-8 h-8 rounded-full bg-gold-base/10 flex items-center justify-center text-gold-base">
-                <CalendarDays className="w-3.5 h-3.5" />
-              </div>
-              <div className="text-left">
-                <p className="text-[8px] tracking-wider uppercase text-gold-base font-bold">Automation</p>
-                <h4 className="text-[10px] font-semibold text-white font-sans">Instant Bookings</h4>
-              </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* Concierge Speaking Subtitle Overlay Bubble */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none max-w-sm w-[90%]">
-        <motion.div 
-          animate={{ opacity: showNotification ? 1 : 0, y: showNotification ? 0 : 20 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="glass-panel px-6 py-4 rounded-2xl border border-white/10 shadow-2xl flex items-start space-x-3 backdrop-blur-xl text-left"
-        >
-          <div className="w-8 h-8 rounded-full bg-gold-base/20 flex items-center justify-center text-gold-base shrink-0">
-            <Sparkles className="w-4 h-4 animate-pulse" />
-          </div>
-          <div>
-            <h5 className="text-[9px] uppercase tracking-widest text-gold-base font-bold">AI Concierge Speech</h5>
-            <p className="text-xs text-white/90 leading-relaxed font-light mt-1">{notificationText}</p>
-          </div>
-        </motion.div>
-      </div>
 
       {/* Floating Action Hint Scroll Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 text-white/40 select-none z-20">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 text-charcoal/40 select-none z-20">
         <span className="text-[9px] uppercase tracking-widest font-semibold">Scroll Down</span>
-        <span className="w-[1px] h-12 bg-gradient-to-b from-white/30 to-transparent relative overflow-hidden">
-          <span className="absolute top-0 left-0 w-full h-1/2 bg-white animate-scrollHint" />
+        <span className="w-[1px] h-12 bg-gradient-to-b from-charcoal/30 to-transparent relative overflow-hidden">
+          <span className="absolute top-0 left-0 w-full h-1/2 bg-gold-base animate-scrollHint" />
         </span>
       </div>
 
@@ -422,10 +293,6 @@ export default function App() {
 
       {/* Audio & Waveframe CSS Inject */}
       <style>{`
-        @keyframes wave {
-          0% { transform: scaleY(0.2); }
-          100% { transform: scaleY(1.3); }
-        }
         @keyframes scrollHint {
           0% { transform: translateY(-100%); }
           80%, 100% { transform: translateY(200%); }

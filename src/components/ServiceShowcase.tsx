@@ -15,7 +15,7 @@ export default function ServiceShowcase() {
       title: "Fine Dining",
       subtitle: "La Mer Dining Pavilion",
       desc: "Experience award-winning seaside cuisine with personalized AI recommendations and seamless reservations.",
-      image: "/bali_light_pool_1784282527802.png",
+      image: "/scene_dining.png",
       aiDetails: [
         { label: "Seating", value: "Oceanfront Window Deck" },
         { label: "Menu", value: "Chef's Special Tasting Menu" },
@@ -27,7 +27,7 @@ export default function ServiceShowcase() {
       title: "Spa & Wellness",
       subtitle: "Anantara Spa Suites",
       desc: "Restore your body and mind through personalized wellness experiences curated by your AI Concierge.",
-      image: "/bali_pool_night_1784281621817.png",
+      image: "/scene_spa.png",
       aiDetails: [
         { label: "Treatment", value: "Royal Balinese Therapy (90m)" },
         { label: "Therapist", value: "Senior Balinese Practitioner" },
@@ -36,22 +36,10 @@ export default function ServiceShowcase() {
       aiStatus: "APPOINTMENT CONFIRMED"
     },
     {
-      title: "Luxury Suites",
-      subtitle: "Ocean Front Lodges",
-      desc: "Discover spacious accommodations designed for exceptional comfort and unforgettable moments.",
-      image: "/bali_room_suite_1784281295986.png",
-      aiDetails: [
-        { label: "Room", value: "King Ocean Front Suite" },
-        { label: "Settle", value: "Late Checkout (2:00 PM)" },
-        { label: "Inclusions", value: "Complimentary Breakfast Buffet" }
-      ],
-      aiStatus: "SUITE ASSIGNED"
-    },
-    {
       title: "Infinity Pool",
-      subtitle: "Cliffside Sunset Deck",
+      subtitle: "Bespoke Guest Curations",
       desc: "Relax above the horizon while enjoying breathtaking panoramic views of the East Sea.",
-      image: "/luxury_pool_1784286709723.png",
+      image: "/scene_infinity.png",
       aiDetails: [
         { label: "Allocation", value: "VIP Cliffside Cabana 03" },
         { label: "Amenities", value: "Premium Towel Service" },
@@ -60,10 +48,22 @@ export default function ServiceShowcase() {
       aiStatus: "CABANA DISPATCHED"
     },
     {
+      title: "Luxury Suites",
+      subtitle: "Ocean Front Lodges",
+      desc: "Discover spacious accommodations designed for exceptional comfort and unforgettable moments.",
+      image: "/scene_suite.png",
+      aiDetails: [
+        { label: "Room", value: "King Ocean Front Suite" },
+        { label: "Settle", value: "Late Checkout (2:00 PM)" },
+        { label: "Inclusions", value: "Complimentary Breakfast Buffet" }
+      ],
+      aiStatus: "SUITE ASSIGNED"
+    },
+    {
       title: "Private Experiences",
       subtitle: "Bespoke Guest Curations",
       desc: "Immerse yourself in multiple luxury experiences arranged by our background automated logistics.",
-      image: "/bali_light_hero_1784282500805.png",
+      image: "/scene_private.png",
       aiDetails: [
         { label: "Transportation", value: "VIP Airport S-Class Pickup" },
         { label: "Curations", value: "Sunset Bay Yacht Charter" },
@@ -120,7 +120,7 @@ export default function ServiceShowcase() {
   return (
     <div 
       ref={sectionRef} 
-      className="relative w-full h-screen bg-luxury-navy overflow-hidden z-10"
+      className="relative w-full h-screen bg-warm-white overflow-hidden z-10"
     >
       {/* Layered Ken Burns Backgrounds */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
@@ -130,14 +130,12 @@ export default function ServiceShowcase() {
             className={`bg-scene-${idx} absolute inset-0 w-full h-full bg-cover bg-center origin-center transition-opacity duration-1000 ease-in-out`}
             style={{ 
               backgroundImage: `url('${scene.image}')`,
-              opacity: activeScene === idx ? 0.75 : 0,
+              opacity: activeScene === idx ? 0.5 : 0,
               zIndex: activeScene === idx ? 2 : 1
             }}
           />
         ))}
-        {/* Constant Luxury Dark & Sunrise Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-luxury-navy/90 via-luxury-navy/30 to-luxury-navy/60 z-10" />
-        <div className="absolute inset-0 bg-radial-gradient(circle at 50% 50%, rgba(8,11,17,0.05) 0%, rgba(8,11,17,0.5) 100%) z-10" />
+        {/* No overlay — images show at full brightness */}
       </div>
 
       {/* Content Box Grid */}
@@ -145,8 +143,8 @@ export default function ServiceShowcase() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
           
           {/* Left side: Editorial Headings */}
-          <div className="lg:col-span-6 text-left space-y-6 select-none">
-            <span className="text-xs tracking-[0.25em] font-semibold text-gold-base uppercase block">
+          <div className="lg:col-span-6 text-left space-y-6">
+            <span className="text-[11px] tracking-[0.3em] font-bold uppercase block" style={{ color: '#A07020' }}>
               {scenes[activeScene].subtitle}
             </span>
             
@@ -160,17 +158,17 @@ export default function ServiceShowcase() {
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="space-y-4"
                 >
-                  <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-light text-white leading-tight">
+                  <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-light leading-tight" style={{ color: '#111111' }}>
                     {scenes[activeScene].title.split(" ").map((w, i) => (
-                      w === "Wellness" || w === "Suites" || w === "Experiences" ? (
-                        <span key={i} className="font-serif italic text-gold-light font-light ml-3">{w}</span>
+                      w === "Wellness" || w === "Suites" || w === "Experiences" || w === "Pool" || w === "Dining" ? (
+                        <span key={i} className="font-serif italic font-semibold ml-2" style={{ color: '#9A6F1A' }}>{w}</span>
                       ) : (
-                        <span key={i} className="font-display font-bold uppercase">{w} </span>
+                        <span key={i} className="font-sans font-extrabold uppercase">{w} </span>
                       )
                     ))}
                   </h2>
-                  
-                  <p className="text-white/70 font-sans text-sm md:text-base leading-relaxed max-w-lg font-light">
+
+                  <p className="font-sans text-sm md:text-base leading-relaxed max-w-lg font-medium" style={{ color: '#2a2a2a' }}>
                     {scenes[activeScene].desc}
                   </p>
                 </motion.div>
@@ -182,7 +180,7 @@ export default function ServiceShowcase() {
               {scenes.map((_, idx) => (
                 <div 
                   key={idx}
-                  className="relative w-8 h-1 bg-white/10 rounded-full overflow-hidden"
+                  className="relative w-8 h-1 bg-charcoal/10 rounded-full overflow-hidden"
                 >
                   {activeScene === idx && (
                     <motion.div 
@@ -205,7 +203,7 @@ export default function ServiceShowcase() {
                   animate={{ opacity: 1, scale: 1, rotateY: 0, y: 0 }}
                   exit={{ opacity: 0, scale: 0.96, rotateY: -10, y: -20 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full glass-panel p-6 rounded-2xl border border-white/10 shadow-2xl relative flex flex-col justify-between"
+                  className="w-full bg-white/90 backdrop-blur-xl p-6 rounded-2xl border border-border-beige shadow-[0_8px_30px_rgba(43,43,43,0.08)] relative flex flex-col justify-between"
                 >
                   {/* Header bar */}
                   <div className="flex items-center justify-between">
@@ -218,11 +216,11 @@ export default function ServiceShowcase() {
                   {/* Specifications List */}
                   <div className="flex flex-col gap-3 my-6">
                     {scenes[activeScene].aiDetails.map((detail, idx) => (
-                      <div key={idx} className="flex items-center justify-between border-b border-white/5 pb-2">
-                        <span className="text-[10px] text-white/40 uppercase tracking-widest font-bold">
+                      <div key={idx} className="flex items-center justify-between border-b border-border-beige pb-2">
+                        <span className="text-[10px] text-warm-gray/60 uppercase tracking-widest font-bold">
                           {detail.label}
                         </span>
-                        <span className="text-xs font-semibold text-white/90">
+                        <span className="text-xs font-semibold text-charcoal">
                           {detail.value}
                         </span>
                       </div>
@@ -230,11 +228,11 @@ export default function ServiceShowcase() {
                   </div>
 
                   {/* Settle Action bar */}
-                  <div className="flex items-center justify-between border-t border-white/5 pt-4">
-                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-bold">
+                  <div className="flex items-center justify-between border-t border-border-beige pt-4">
+                    <span className="text-[10px] text-warm-gray/60 uppercase tracking-widest font-bold">
                       Status
                     </span>
-                    <span className="bg-gold-base/20 border border-gold-base/40 text-gold-light px-3.5 py-1.5 rounded-full text-[10px] font-bold tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(197,168,128,0.15)]">
+                    <span className="bg-gold-base/15 border border-gold-base/40 text-gold-dark px-3.5 py-1.5 rounded-full text-[10px] font-bold tracking-wider flex items-center gap-1.5">
                       <CheckCircle2 className="w-3.5 h-3.5 text-gold-base" />
                       <span>{scenes[activeScene].aiStatus}</span>
                     </span>
@@ -248,7 +246,7 @@ export default function ServiceShowcase() {
       </div>
 
       {/* Scroll down indicator for within-showcase progress */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center space-x-2 text-white/30 text-[9px] uppercase tracking-widest select-none z-30">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center space-x-2 text-charcoal/30 text-[9px] uppercase tracking-widest select-none z-30">
         <span>Continue Scroll for experiences</span>
       </div>
     </div>

@@ -5,11 +5,22 @@
   --font-sans: "Outfit", sans-serif;
   --font-display: "Syne", sans-serif;
   
-  --color-gold-light: #F4EAD4;
-  --color-gold-base: #C5A880;
-  --color-gold-dark: #9A8059;
-  --color-luxury-navy: #080B11;
-  --color-luxury-blue: #0E1624;
+  --color-warm-white: #FCFBF7;
+  --color-soft-sand: #F7F3EB;
+  --color-pure-white: #FFFFFF;
+  --color-accent-blue: #4FA8D8;
+  --color-ocean-blue: #6FC3E8;
+  --color-palm-green: #6BAA75;
+  --color-gold-base: #CDAA6D;
+  --color-gold-light: #F2E7D8;
+  --color-gold-dark: #CDAA6D;
+  --color-border-beige: #E8E3DA;
+  --color-charcoal: #2B2B2B;
+  --color-warm-gray: #6E6E6E;
+  
+  /* Retain compatibility names mapped to the new sunlit palette */
+  --color-luxury-navy: #FCFBF7;
+  --color-luxury-blue: #F7F3EB;
 }
 
 /* ==========================================================================
@@ -39,8 +50,8 @@ html.lenis {
    Global Reset & Cursor Styles
    ========================================================================== */
 html, body {
-  background-color: var(--color-luxury-navy);
-  color: #FFFFFF;
+  background-color: var(--color-warm-white);
+  color: var(--color-charcoal);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -58,10 +69,10 @@ html, body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-luxury-navy);
+  background: var(--color-soft-sand);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1C2331;
+  background: var(--color-border-beige);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -70,8 +81,8 @@ html, body {
 
 /* Glassmorphism utility */
 .glass-panel {
-  background: rgba(14, 22, 36, 0.45);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border-beige);
 }
