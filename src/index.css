@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Outfit", sans-serif;
+  --font-display: "Syne", sans-serif;
+  
+  --color-gold-light: #F4EAD4;
+  --color-gold-base: #C5A880;
+  --color-gold-dark: #9A8059;
+  --color-luxury-navy: #080B11;
+  --color-luxury-blue: #0E1624;
+}
+
+/* ==========================================================================
+   Smooth Scrolling (Lenis Integration)
+   ========================================================================== */
+html.lenis {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Global Reset & Cursor Styles
+   ========================================================================== */
+html, body {
+  background-color: var(--color-luxury-navy);
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-luxury-navy);
+}
+::-webkit-scrollbar-thumb {
+  background: #1C2331;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-base);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(14, 22, 36, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
