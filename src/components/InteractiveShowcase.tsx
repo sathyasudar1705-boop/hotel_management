@@ -189,7 +189,10 @@ export default function InteractiveShowcase() {
                     exit={{ opacity: 0, scale: 0.98 }}
                     className="absolute inset-0 p-6 flex flex-col justify-between text-left"
                   >
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="absolute inset-0 pointer-events-none z-0">
+                      <img src="/media__1784531547754.jpg" className="w-full h-full object-cover brightness-[0.25]" alt="" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 relative z-10">
                       <div className="glass-panel p-4 rounded-xl border border-gold-base/30 bg-gold-base/5 shadow-[0_0_15px_rgba(197,168,128,0.05)]">
                         <span className="text-[9px] text-gold-base uppercase tracking-widest block font-bold">Selected Room</span>
                         <h4 className="text-lg font-serif text-white mt-1">King Ocean View Suite</h4>
@@ -203,7 +206,7 @@ export default function InteractiveShowcase() {
                       </div>
                     </div>
 
-                    <div className="glass-panel p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/5 flex items-center justify-between">
+                    <div className="glass-panel p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/5 flex items-center justify-between relative z-10">
                       <div className="flex items-center space-x-3">
                         <CheckCircle2 className="w-5 h-5 text-emerald-400" />
                         <div>
