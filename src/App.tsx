@@ -6,9 +6,8 @@ import { motion } from 'framer-motion';
 import { Sparkles, Play, ArrowRight, Star, CalendarDays, Volume2, VolumeX } from 'lucide-react';
 import ConciergeJourney from './components/ConciergeJourney';
 import ServiceShowcase from './components/ServiceShowcase';
-import GuestJourneyTimeline from './components/GuestJourneyTimeline';
-import InteractiveShowcase from './components/InteractiveShowcase';
 import FinalChapter from './components/FinalChapter';
+import Navbar from './components/Navbar';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -207,80 +206,77 @@ export default function App() {
       ref={containerRef}
       className="relative w-full bg-luxury-navy overflow-x-hidden"
     >
+      {/* Floating Pill Navbar */}
+      <Navbar />
       {/* Background with layered Ken Burns & Environmental sunlight filter */}
       <div className="fixed inset-0 w-full h-screen overflow-hidden pointer-events-none z-0">
         <div 
           ref={bgRef}
           className="absolute inset-0 w-full h-full bg-cover bg-center origin-center filter brightness-[0.8]"
-          style={{ backgroundImage: `url('/hero_main_banner.jpg')` }}
+          style={{ backgroundImage: `url('/media__1784531917027.jpg')` }}
         />
         {/* Soft Golden Sunset overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-luxury-navy via-luxury-navy/30 to-transparent z-1" />
-        <div className="absolute inset-0 bg-radial-gradient(circle at 70% 30%, rgba(197, 168, 128, 0.15) 0%, transparent 60%) z-1" />
+        <div className="absolute inset-0 bg-gradient-to-t from-luxury-navy/55 via-luxury-navy/15 to-transparent z-1" />
+        <div className="absolute inset-0 bg-radial-gradient(circle at 70% 30%, rgba(197, 168, 128, 0.1) 0%, transparent 60%) z-1" />
         {/* Living atmospheric particles */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-40 z-1 pointer-events-none" />
       </div>
 
       {/* Fullscreen Hero Section */}
-      <section className="relative w-full h-screen flex items-center px-6 md:px-20 z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full max-w-7xl mx-auto">
+      <section className="relative w-full h-screen flex items-center px-6 md:px-20 z-10 pt-28">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center w-full max-w-7xl mx-auto">
           
           {/* Left Column: Premium Editorial Typography & CTAs */}
           <div 
             ref={heroContentRef} 
-            className="lg:col-span-7 flex flex-col items-start text-left space-y-6 md:space-y-8 select-none"
+            className="lg:col-span-7 flex flex-col items-start text-left space-y-4 md:space-y-5 select-none"
           >
-            {/* Top Tagline */}
-            <div className="overflow-hidden flex items-center space-x-3 text-gold-base font-semibold tracking-[0.25em] text-xs">
-              <span className="reveal-line block font-sans">GRAND HOTEL</span>
-              <span className="reveal-line block w-1.5 h-1.5 rounded-full bg-gold-base" />
-              <span className="reveal-line block font-sans text-white/60">Da Nang, Vietnam</span>
-            </div>
+
 
             {/* Main Headline */}
-            <div className="flex flex-col space-y-1 md:space-y-2">
+            <div className="flex flex-col space-y-0.5">
               <div className="overflow-hidden">
-                <h1 className="reveal-line text-4xl sm:text-6xl md:text-[5.2rem] font-display font-bold leading-[1.05] tracking-tight uppercase text-white">
+                <h1 className="reveal-line text-2xl sm:text-4xl md:text-[3.4rem] font-display font-bold leading-[1.05] tracking-tight uppercase text-white">
                   Experience
                 </h1>
               </div>
               <div className="overflow-hidden">
-                <h1 className="reveal-line text-4xl sm:text-6xl md:text-[5.2rem] font-serif font-light italic leading-[1.05] tracking-tight text-gold-light">
+                <h1 className="reveal-line text-2xl sm:text-4xl md:text-[3.4rem] font-serif font-light italic leading-[1.05] tracking-tight text-gold-light">
                   Luxury
                 </h1>
               </div>
               <div className="overflow-hidden">
-                <h1 className="reveal-line text-4xl sm:text-6xl md:text-[5.2rem] font-display font-bold leading-[1.05] tracking-tight uppercase text-white">
+                <h1 className="reveal-line text-2xl sm:text-4xl md:text-[3.4rem] font-display font-bold leading-[1.05] tracking-tight uppercase text-white">
                   Where Elegance
                 </h1>
               </div>
               <div className="overflow-hidden">
-                <h1 className="reveal-line text-4xl sm:text-6xl md:text-[5.2rem] font-serif font-light italic leading-[1.05] tracking-tight text-gold-light">
+                <h1 className="reveal-line text-2xl sm:text-4xl md:text-[3.4rem] font-serif font-light italic leading-[1.05] tracking-tight text-gold-light">
                   Meets Innovation
                 </h1>
               </div>
             </div>
 
             {/* Description */}
-            <p className="reveal-desc text-white/70 font-sans text-sm md:text-base leading-relaxed max-w-xl font-light">
+            <p className="reveal-desc text-white/70 font-sans text-xs md:text-sm leading-relaxed max-w-md font-light mt-4 md:mt-5">
               Your personal AI concierge awaits. From fine dining reservations to spa bookings, experience world-class hospitality powered by intelligent automation.
             </p>
 
             {/* Premium Interactive Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
-              <button className="reveal-btn relative overflow-hidden group px-8 py-4 bg-white text-luxury-navy font-bold font-sans text-xs tracking-wider uppercase rounded-full shadow-lg transition-all duration-500 hover:text-white hover:bg-transparent">
+            <div className="flex flex-wrap items-center gap-3 pt-6 md:pt-8">
+              <button className="reveal-btn relative overflow-hidden group px-5 py-2.5 bg-white text-luxury-navy font-bold font-sans text-[10px] tracking-wider uppercase rounded-full shadow-lg transition-all duration-500 hover:text-white hover:bg-transparent">
                 {/* Glowing border outline */}
                 <span className="absolute inset-0 border border-white rounded-full group-hover:scale-100 scale-95 opacity-0 group-hover:opacity-100 transition-all duration-500" />
                 <span className="absolute inset-0 bg-gradient-to-r from-gold-base to-gold-dark opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-1" />
-                <span className="relative z-10 flex items-center space-x-2">
+                <span className="relative z-10 flex items-center space-x-1.5">
                   <span>Start AI Concierge</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-500 group-hover:translate-x-1" />
                 </span>
               </button>
 
-              <button className="reveal-btn relative overflow-hidden group px-8 py-4 glass-panel text-white font-semibold font-sans text-xs tracking-wider uppercase rounded-full transition-all duration-500 hover:bg-white/10">
-                <span className="relative z-10 flex items-center space-x-2">
-                  <Play className="w-3.5 h-3.5 fill-white" />
+              <button className="reveal-btn relative overflow-hidden group px-5 py-2.5 glass-panel text-white font-semibold font-sans text-[10px] tracking-wider uppercase rounded-full transition-all duration-500 hover:bg-white/10">
+                <span className="relative z-10 flex items-center space-x-1.5">
+                  <Play className="w-3 h-3 fill-white" />
                   <span>Watch Experience</span>
                 </span>
               </button>
@@ -288,32 +284,32 @@ export default function App() {
           </div>
 
           {/* Right Column: AI Concierge Breathing Orb & Drifting Cards */}
-          <div className="lg:col-span-5 relative w-full h-[380px] lg:h-[500px] flex items-center justify-center">
+          <div className="lg:col-span-5 relative w-full h-[280px] lg:h-[400px] flex items-center justify-center">
             
             {/* The Elegant AI Concierge Orb */}
             <div 
               ref={orbRef}
-              className="relative w-64 h-64 md:w-80 md:h-80 rounded-full flex items-center justify-center z-10 select-none cursor-pointer"
+              className="relative w-48 h-48 md:w-60 md:h-60 rounded-full flex items-center justify-center z-10 select-none cursor-pointer"
               onClick={() => setIsPlayingVoice(!isPlayingVoice)}
             >
               {/* Radial Blur Glowing Rings */}
-              <div className="absolute inset-0 rounded-full bg-radial-gradient(circle, rgba(197, 168, 128, 0.2) 0%, rgba(14, 22, 36, 0.4) 60%, transparent 100%)" />
+              <div className="absolute inset-0 rounded-full bg-radial-gradient(circle, rgba(197, 168, 128, 0.15) 0%, rgba(14, 22, 36, 0.3) 60%, transparent 100%)" />
               <div className="absolute inset-0 rounded-full border border-gold-base/15 animate-[spin_60s_linear_infinite]" />
-              <div className="absolute inset-10 rounded-full border border-dashed border-white/5 animate-[spin_40s_linear_infinite_reverse]" />
+              <div className="absolute inset-8 rounded-full border border-dashed border-white/5 animate-[spin_40s_linear_infinite_reverse]" />
               
               {/* Central Glowing Capsule/Sphere */}
-              <div className="absolute w-40 h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-luxury-blue/90 to-luxury-navy/95 border border-white/10 shadow-[0_0_50px_rgba(197,168,128,0.15)] flex items-center justify-center group overflow-hidden">
+              <div className="absolute w-28 h-28 md:w-36 md:h-36 rounded-full bg-gradient-to-br from-luxury-blue/90 to-luxury-navy/95 border border-white/10 shadow-[0_0_40px_rgba(197,168,128,0.12)] flex items-center justify-center group overflow-hidden">
                 {/* Breathing Inner Radial Core */}
-                <div className="absolute inset-4 rounded-full bg-radial-gradient(circle, rgba(197, 168, 128, 0.25) 0%, transparent 70%) animate-[pulse_4s_ease-in-out_infinite]" />
+                <div className="absolute inset-3 rounded-full bg-radial-gradient(circle, rgba(197, 168, 128, 0.2) 0%, transparent 70%) animate-[pulse_4s_ease-in-out_infinite]" />
                 
                 {/* Live sound waveform bars */}
-                <div className="flex items-center gap-1.5 z-10 h-8">
+                <div className="flex items-center gap-1 z-10 h-6">
                   {[0.5, 0.8, 1.2, 0.7, 1.5, 0.9, 1.3, 0.6, 1.0].map((val, i) => (
                     <span 
                       key={i}
-                      className="w-1 rounded-full bg-gradient-to-t from-gold-base to-gold-light opacity-80"
+                      className="w-0.5 rounded-full bg-gradient-to-t from-gold-base to-gold-light opacity-80"
                       style={{
-                        height: `${val * 24}px`,
+                        height: `${val * 16}px`,
                         animation: isPlayingVoice 
                           ? `wave 1.${i + 3}s ease-in-out infinite alternate`
                           : 'none',
@@ -324,15 +320,15 @@ export default function App() {
                 </div>
 
                 {/* Voice toggle button */}
-                <div className="absolute bottom-4 z-10 text-[9px] uppercase tracking-widest text-gold-base font-semibold flex items-center gap-1 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute bottom-3 z-10 text-[8px] uppercase tracking-widest text-gold-base font-semibold flex items-center gap-1 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
                   {isPlayingVoice ? (
                     <>
-                      <Volume2 className="w-3 h-3" />
+                      <Volume2 className="w-2.5 h-2.5" />
                       <span>Live Concierge</span>
                     </>
                   ) : (
                     <>
-                      <VolumeX className="w-3 h-3 text-white/40" />
+                      <VolumeX className="w-2.5 h-2.5 text-white/40" />
                       <span className="text-white/40">Muted</span>
                     </>
                   )}
@@ -343,42 +339,42 @@ export default function App() {
             {/* Drifting Premium Card 1: 24/7 AI Concierge */}
             <div 
               ref={card1Ref}
-              className="float-card absolute top-4 left-4 md:-left-4 z-20 glass-panel px-5 py-4 rounded-2xl flex items-center space-x-3 shadow-lg select-none border border-white/10 hover:border-gold-base/30 transition-colors duration-500"
+              className="float-card absolute top-12 left-4 md:left-0 z-20 glass-panel px-4 py-3 rounded-xl flex items-center space-x-2.5 shadow-lg select-none border border-white/10 hover:border-gold-base/30 transition-colors duration-500 scale-90"
             >
-              <div className="w-9 h-9 rounded-full bg-gold-base/10 flex items-center justify-center text-gold-base">
-                <Sparkles className="w-4 h-4" />
+              <div className="w-8 h-8 rounded-full bg-gold-base/10 flex items-center justify-center text-gold-base">
+                <Sparkles className="w-3.5 h-3.5" />
               </div>
               <div className="text-left">
-                <p className="text-[10px] tracking-wider uppercase text-gold-base font-bold">Intelligence</p>
-                <h4 className="text-xs font-semibold text-white font-sans">24/7 AI Concierge</h4>
+                <p className="text-[8px] tracking-wider uppercase text-gold-base font-bold">Intelligence</p>
+                <h4 className="text-[10px] font-semibold text-white font-sans">24/7 AI Concierge</h4>
               </div>
             </div>
 
             {/* Drifting Premium Card 2: 5 Stars Service */}
             <div 
               ref={card2Ref}
-              className="float-card absolute bottom-6 right-4 md:-right-8 z-20 glass-panel px-5 py-4 rounded-2xl flex items-center space-x-3 shadow-lg select-none border border-white/10 hover:border-gold-base/30 transition-colors duration-500"
+              className="float-card absolute bottom-16 right-4 md:right-0 z-20 glass-panel px-4 py-3 rounded-xl flex items-center space-x-2.5 shadow-lg select-none border border-white/10 hover:border-gold-base/30 transition-colors duration-500 scale-90"
             >
-              <div className="w-9 h-9 rounded-full bg-gold-base/10 flex items-center justify-center text-gold-base">
-                <Star className="w-4 h-4 fill-gold-base" />
+              <div className="w-8 h-8 rounded-full bg-gold-base/10 flex items-center justify-center text-gold-base">
+                <Star className="w-3.5 h-3.5 fill-gold-base text-gold-base" />
               </div>
               <div className="text-left">
-                <p className="text-[10px] tracking-wider uppercase text-gold-base font-bold">Standard</p>
-                <h4 className="text-xs font-semibold text-white font-sans">★★★★★ Luxury Service</h4>
+                <p className="text-[8px] tracking-wider uppercase text-gold-base font-bold">Standard</p>
+                <h4 className="text-[10px] font-semibold text-white font-sans">★★★★★ Luxury Service</h4>
               </div>
             </div>
 
             {/* Drifting Premium Card 3: Instant Bookings */}
             <div 
               ref={card3Ref}
-              className="float-card absolute bottom-12 left-8 md:-left-8 z-20 glass-panel px-5 py-4 rounded-2xl flex items-center space-x-3 shadow-lg select-none border border-white/10 hover:border-gold-base/30 transition-colors duration-500"
+              className="float-card absolute bottom-20 left-8 md:left-2 z-20 glass-panel px-4 py-3 rounded-xl flex items-center space-x-2.5 shadow-lg select-none border border-white/10 hover:border-gold-base/30 transition-colors duration-500 scale-90"
             >
-              <div className="w-9 h-9 rounded-full bg-gold-base/10 flex items-center justify-center text-gold-base">
-                <CalendarDays className="w-4 h-4" />
+              <div className="w-8 h-8 rounded-full bg-gold-base/10 flex items-center justify-center text-gold-base">
+                <CalendarDays className="w-3.5 h-3.5" />
               </div>
               <div className="text-left">
-                <p className="text-[10px] tracking-wider uppercase text-gold-base font-bold">Automation</p>
-                <h4 className="text-xs font-semibold text-white font-sans">Instant Bookings</h4>
+                <p className="text-[8px] tracking-wider uppercase text-gold-base font-bold">Automation</p>
+                <h4 className="text-[10px] font-semibold text-white font-sans">Instant Bookings</h4>
               </div>
             </div>
 
@@ -417,11 +413,9 @@ export default function App() {
       {/* Section 3: Pinned split-layout Scroll-progress Service Showcase (Fine Dining, Spa, Suites, Pool, Private Experiences) */}
       <ServiceShowcase />
 
-      {/* Section 5: Pinned scroll-driven Guest Journey Timeline */}
-      <GuestJourneyTimeline />
 
-      {/* Section 7: Interactive AI Concierge Dashboard Demonstration */}
-      <InteractiveShowcase />
+
+
 
       {/* Section 6: Breathtaking Final Chapter & Footer */}
       <FinalChapter />

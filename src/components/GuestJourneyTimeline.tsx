@@ -199,7 +199,7 @@ export default function GuestJourneyTimeline() {
                   className="absolute inset-0 p-6 flex flex-col justify-between"
                 >
                   <div className="absolute inset-0 pointer-events-none z-0">
-                    <img src="/media__1784531547754.jpg" className="w-full h-full object-cover brightness-[0.4]" alt="" />
+                    <img src="/bali_room_suite_1784281295986.png" className="w-full h-full object-cover brightness-[0.4]" alt="" />
                   </div>
                   <div className="relative z-10 text-left">
                     <span className="text-[8px] bg-gold-base/20 text-gold-light px-2 py-0.5 rounded font-bold uppercase">Suite Booking</span>

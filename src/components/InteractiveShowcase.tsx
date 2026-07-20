@@ -46,8 +46,7 @@ export default function InteractiveShowcase() {
     }
   ];
 
-  // Dynamic voice waves
-  const baseWaveforms = [16, 32, 48, 24, 38, 20, 32, 14, 8];
+
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -93,34 +92,17 @@ export default function InteractiveShowcase() {
               AI Concierge Core
             </span>
 
-            {/* Glowing Avatar Orb */}
-            <div className="relative w-36 h-36 rounded-full flex items-center justify-center mx-auto lg:mx-0">
-              {/* Outer breathing ring */}
-              <motion.div 
-                animate={{ scale: [1, 1.08, 1], opacity: [0.2, 0.4, 0.2] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute inset-0 rounded-full border-2 border-gold-base/30 filter blur-[2px]"
+            {/* Glowing Avatar Video Container (no roundness, standard aspect ratio card) */}
+            <div className="relative w-full aspect-square rounded-2xl border border-white/10 overflow-hidden shadow-2xl flex items-center justify-center mx-auto lg:mx-0 bg-[radial-gradient(circle_at_center,_rgba(197,168,128,0.18)_0%,_rgba(14,22,36,0.95)_100%)]">
+              {/* Embedded Video */}
+              <video 
+                src="/Avatar_video_for_landing_page.mp4" 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                className="absolute inset-0 w-full h-full object-contain opacity-100 mix-blend-screen"
               />
-              {/* Inner glass orb container */}
-              <div className="absolute w-28 h-28 rounded-full bg-radial-gradient(circle, rgba(14,22,36,0.85) 0%, rgba(8,11,17,0.95) 100%) border border-white/10 flex flex-col items-center justify-center shadow-[0_0_40px_rgba(197,168,128,0.15)] overflow-hidden">
-                <div className="absolute inset-0 bg-radial-gradient(circle, rgba(197, 168, 128, 0.15) 0%, transparent 60%)" />
-                
-                {/* Waveform synced to active speech */}
-                <div className="flex items-center gap-1 z-10 h-6">
-                  {baseWaveforms.map((h, i) => (
-                    <motion.span 
-                      key={i}
-                      animate={{ height: [h * 0.3, h * 0.95, h * 0.3] }}
-                      transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.07, ease: "easeInOut" }}
-                      className="w-0.5 rounded-full bg-gold-base"
-                      style={{ transformOrigin: 'center' }}
-                    />
-                  ))}
-                </div>
-                <span className="text-[7px] uppercase tracking-widest text-gold-base font-bold mt-1.5 z-10">
-                  Concierge Live
-                </span>
-              </div>
             </div>
 
             {/* Transcription speech bubble */}
@@ -189,10 +171,7 @@ export default function InteractiveShowcase() {
                     exit={{ opacity: 0, scale: 0.98 }}
                     className="absolute inset-0 p-6 flex flex-col justify-between text-left"
                   >
-                    <div className="absolute inset-0 pointer-events-none z-0">
-                      <img src="/media__1784531547754.jpg" className="w-full h-full object-cover brightness-[0.25]" alt="" />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 relative z-10">
+                    <div className="grid grid-cols-2 gap-4">
                       <div className="glass-panel p-4 rounded-xl border border-gold-base/30 bg-gold-base/5 shadow-[0_0_15px_rgba(197,168,128,0.05)]">
                         <span className="text-[9px] text-gold-base uppercase tracking-widest block font-bold">Selected Room</span>
                         <h4 className="text-lg font-serif text-white mt-1">King Ocean View Suite</h4>
@@ -206,7 +185,7 @@ export default function InteractiveShowcase() {
                       </div>
                     </div>
 
-                    <div className="glass-panel p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/5 flex items-center justify-between relative z-10">
+                    <div className="glass-panel p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/5 flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <CheckCircle2 className="w-5 h-5 text-emerald-400" />
                         <div>

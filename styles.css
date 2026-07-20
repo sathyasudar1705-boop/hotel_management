@@ -1,0 +1,1075 @@
+/* ==========================================================================
+   Aurelia AI Design System & Stylesheet (Grand Hotel Inspired)
+   ========================================================================== */
+
+:root {
+  /* Colors */
+  --color-bg-base: #FDFBF7;         /* Warm Grand alabaster */
+  --color-bg-alt: #F4F1EA;          /* Light cream background */
+  --color-text-primary: #1F2421;    /* Deep slate charcoal */
+  --color-text-muted: #6B7280;      /* Muted gray */
+  --color-text-light: #FFFFFF;
+  
+  --color-blue: #0A3254;            /* Royal Midnight Blue */
+  --color-olive: #C5A880;           /* Sand Gold */
+  --color-olive-dark: #9A8059;
+  --color-olive-glow: rgba(197, 168, 128, 0.15);
+
+  --color-navy: #131C2C;
+  --color-border: rgba(17, 17, 17, 0.08);
+  
+  /* Fonts */
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Outfit', sans-serif;
+  --font-ui: 'Outfit', sans-serif;
+  --font-display: 'Syne', sans-serif;
+
+  /* Layout */
+  --header-height: 80px;
+  --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-premium-sm: 0 4px 20px rgba(17, 17, 17, 0.02);
+  --shadow-premium-md: 0 12px 40px rgba(17, 17, 17, 0.04);
+  --shadow-premium-lg: 0 30px 80px rgba(17, 17, 17, 0.08);
+}
+
+/* ==========================================================================
+   1. Reset & Global Styles
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-olive);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+.custom-cursor-follower {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-olive);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.cursor-hovering .custom-cursor {
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+}
+body.cursor-hovering .custom-cursor-follower {
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-olive-glow);
+  border-color: var(--color-olive-dark);
+}
+
+/* ==========================================================================
+   2. Header & Navigation (Monalisa Centered Logo Style)
+   ========================================================================== */
+.header-nav {
+  width: 100%;
+  height: var(--header-height);
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--color-border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+}
+
+.nav-left {
+  justify-content: flex-start;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--color-olive);
+}
+
+/* General Buttons */
+.btn {
+  border: none;
+  border-radius: 9999px;
+  padding: 12px 28px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-primary {
+  background-color: var(--color-text-primary);
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.btn-dark-pill {
+  background-color: var(--color-text-primary);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  border: none;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-dark-pill:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+}
+
+.btn-green-check {
+  background-color: var(--color-olive);
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-green-check:hover {
+  background-color: var(--color-olive-dark);
+}
+
+/* ==========================================================================
+   3. Hero Section (Centred Titles & Large visual backdrop)
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  height: 90vh;
+  min-height: 550px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-banner-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(17, 17, 17, 0.25), rgba(17, 17, 17, 0.7));
+  z-index: 1;
+}
+
+.cinematic-zoom-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  animation: zoomCinematic 30s ease-in-out infinite;
+}
+
+@keyframes zoomCinematic {
+  0%, 100% { transform: scale(1.05); }
+  50% { transform: scale(1.15); }
+}
+
+.hero-content-box {
+  position: relative;
+  z-index: 5;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 900px;
+  padding: 0 24px;
+}
+
+.hero-serif-subtitle {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: var(--color-olive);
+  text-transform: uppercase;
+}
+
+.hero-location-text {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 500;
+  color: #E5E7EB;
+  letter-spacing: 1px;
+}
+
+.hero-serif-title {
+  font-family: var(--font-display);
+  font-size: 68px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin: 10px 0;
+}
+
+.hero-experience-indicator {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 600;
+  color: #F3F4F6;
+  letter-spacing: 2px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 16px;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+}
+
+/* 11. Staggered Entry reveals */
+.animate-reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: revealUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-reveal-up:nth-child(1) { animation-delay: 0.15s; }
+.animate-reveal-up:nth-child(2) { animation-delay: 0.3s; }
+.animate-reveal-up:nth-child(3) { animation-delay: 0.45s; }
+.animate-reveal-up:nth-child(4) { animation-delay: 0.65s; }
+
+@keyframes revealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   4. Demo Section (Featured Pool Slider with AI Booking Card Overlay)
+   ========================================================================== */
+.demo-section {
+  padding: 100px 24px;
+  background-color: #FAF8F5;
+  position: relative;
+}
+
+.section-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.slider-media-box {
+  height: 480px;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-media-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(17, 17, 17, 0.2), rgba(17, 17, 17, 0.6));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  gap: 12px;
+}
+
+.slider-overlay h3 {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.slider-overlay p {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.play-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.play-btn:hover {
+  background-color: #fff;
+  color: var(--color-text-primary);
+  transform: scale(1.1);
+}
+
+/* AI Booking Card Overlay */
+.ai-booking-card {
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  margin: -120px auto 0 auto;
+  position: relative;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 32px;
+  padding: 40px;
+}
+
+.ai-avatar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border-right: 1px solid var(--color-border);
+  padding-right: 32px;
+  text-align: center;
+}
+
+.avatar-ring-glow {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid var(--color-olive);
+  animation: ringPulse 2s infinite;
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+.avatar-face {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--color-bg-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 5;
+}
+
+.icon-olive {
+  color: var(--color-olive);
+}
+
+.avatar-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-olive);
+  animation: dotFlash 1.5s infinite alternate;
+}
+
+@keyframes dotFlash {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.dialogue-box {
+  background-color: #F9F8F6;
+  padding: 16px;
+  border-radius: 12px;
+  width: 100%;
+  text-align: left;
+}
+
+.dialogue-speaker {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-olive);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.dialogue-text {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.booking-widget-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.widget-tagline {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-muted);
+  text-align: left;
+}
+
+.booking-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 1.2fr;
+  gap: 16px;
+}
+
+.form-input-box {
+  background-color: #F9FAFB;
+  border: 1px solid var(--color-border);
+  padding: 14px 18px;
+  border-radius: 12px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.form-input-box:hover, .form-input-box.active {
+  border-color: var(--color-olive);
+  background-color: #fff;
+}
+
+.input-lbl {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #9CA3AF;
+  letter-spacing: 0.5px;
+}
+
+.form-input-box h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.input-sub {
+  font-size: 9px;
+  color: #9CA3AF;
+}
+
+/* Success Toast style */
+.booking-success-toast {
+  background-color: #FAFBF6;
+  border: 1px solid rgba(122, 130, 54, 0.2);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition-smooth);
+}
+
+.booking-success-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.booking-success-toast h5 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.booking-success-toast p {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   5. About Section (Monalisa Circular Stamp Layout)
+   ========================================================================== */
+.about-section {
+  padding: 120px 24px;
+  background-color: var(--color-bg-base);
+}
+
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-media-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.about-photo {
+  width: 80%;
+  height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Circular spinning stamp */
+.circular-stamp-badge {
+  position: absolute;
+  bottom: -30px;
+  left: 20px;
+  width: 140px;
+  height: 140px;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.stamp-svg {
+  width: 100%;
+  height: 100%;
+  animation: spinStamp 24s linear infinite;
+}
+
+@keyframes spinStamp {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.text-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  text-align: left;
+}
+
+.section-tagline {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--color-olive);
+  text-transform: uppercase;
+}
+
+.serif-title {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+}
+
+.section-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.news-link-olive {
+  color: var(--color-olive);
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s;
+}
+
+.news-link-olive:hover {
+  color: var(--color-olive-dark);
+}
+
+.arrow-inline {
+  width: 14px;
+  height: 14px;
+}
+
+/* ==========================================================================
+   6. Luxury Interior Rooms Section (Vertical list / big image)
+   ========================================================================== */
+.rooms-section {
+  padding: 120px 24px;
+  background-color: var(--color-bg-base);
+  border-top: 1px solid var(--color-border);
+}
+
+.rooms-list-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+  text-align: left;
+}
+
+.rooms-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.room-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.room-item:hover, .room-item.active {
+  border-color: var(--color-olive);
+  box-shadow: var(--shadow-premium-sm);
+  background-color: #FAFBF8;
+}
+
+.room-thumb {
+  width: 64px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.room-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.room-details h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.room-details span {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.room-display-media {
+  height: 440px;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ==========================================================================
+   7. Testimonial Section
+   ========================================================================== */
+.testimonial-section {
+  padding: 100px 24px;
+  background-color: #FAF8F5;
+  text-align: center;
+}
+
+.align-center {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.testimonial-box {
+  background-color: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 44px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.testimonial-author {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-olive);
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   8. Footer CTA Section (Sunset view overlay)
+   ========================================================================== */
+.footer-cta-section {
+  position: relative;
+  padding: 140px 24px;
+  overflow: hidden;
+  text-align: center;
+  min-height: 460px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-bg-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-bg-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(17, 17, 17, 0.45), rgba(17, 17, 17, 0.9));
+  z-index: 1;
+}
+
+.footer-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 70%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cta-box {
+  position: relative;
+  z-index: 5;
+  max-width: 780px;
+  margin: 0 auto;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.cta-title {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.cta-subtitle {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #CBD5E1;
+  max-width: 540px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   9. Footer Bottom legal bar
+   ========================================================================== */
+.footer-bottom {
+  background-color: var(--color-text-primary);
+  color: #F9FAFB;
+  padding: 40px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9CA3AF;
+}
+
+.footer-legal-bar {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal-bar a {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9CA3AF;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-legal-bar a:hover {
+  color: var(--color-olive);
+}
+
+/* ==========================================================================
+   10. Contact Modal
+   ========================================================================== */
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.contact-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(17, 17, 17, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.modal-content-card {
+  background-color: #fff;
+  width: 100%;
+  max-width: 480px;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-premium-lg);
+  position: relative;
+  z-index: 10;
+  transform: translateY(40px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-modal.open .modal-content-card {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-text-muted);
+}
+
+.modal-inner h3 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.modal-inner p {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.form-input-white {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-input-white:focus {
+  border-color: var(--color-olive);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.modal-success-hidden {
+  display: none;
+}
+
+.modal-success-hidden.show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.icon-gold {
+  color: var(--color-olive);
+}
+
+/* ==========================================================================
+   Responsive Adapters
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-serif-title {
+    font-size: 64px;
+  }
+  .header-nav {
+    display: none; /* Hide desktop nav bar overlay on mobile viewports */
+  }
+  .ai-booking-card {
+    grid-template-columns: 1fr;
+    margin-top: -60px;
+    padding: 24px;
+  }
+  .ai-avatar-column {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding-right: 0;
+    padding-bottom: 24px;
+  }
+  .booking-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .split-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .about-photo {
+    width: 100%;
+    height: 300px;
+  }
+  .room-display-media {
+    height: 300px;
+  }
+  .footer-bottom-container {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}

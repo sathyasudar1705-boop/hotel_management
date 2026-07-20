@@ -9,12 +9,7 @@ export default function ConciergeJourney() {
   const [restaurantConfirmed, setRestaurantConfirmed] = useState(false);
   const [spaConfirmed, setSpaConfirmed] = useState(false);
 
-  // Synchronized waveform height values for visual feedback
-  const waveformHeights = {
-    0: [12, 28, 44, 20, 36, 18, 30, 14, 8],
-    1: [24, 18, 38, 48, 22, 40, 16, 28, 12],
-    2: [8, 14, 20, 12, 16, 10, 14, 8, 4]
-  };
+
 
   useEffect(() => {
     let timer: any;
@@ -68,33 +63,17 @@ export default function ConciergeJourney() {
           
           {/* LEFT SIDE (40% width / 5 Cols): AI Concierge Interface */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
-            {/* Glowing Concierge Avatar Orb */}
-            <div className="relative w-44 h-44 rounded-full flex items-center justify-center">
-              {/* Outer breathing ring */}
-              <motion.div 
-                animate={{ scale: [1, 1.08, 1], opacity: [0.2, 0.4, 0.2] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute inset-0 rounded-full border-2 border-gold-base/30 filter blur-[2px]"
+            {/* Glowing Avatar Video Container (no roundness, standard aspect ratio card) */}
+            <div className="relative w-56 h-56 md:w-64 md:h-64 rounded-2xl border border-white/10 overflow-hidden shadow-2xl flex items-center justify-center mx-auto lg:mx-0 lg:ml-12 bg-[radial-gradient(circle_at_center,_rgba(197,168,128,0.18)_0%,_rgba(14,22,36,0.95)_100%)]">
+              {/* Embedded Video */}
+              <video 
+                src="/Avatar_video_for_landing_page.mp4" 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                className="absolute inset-0 w-full h-full object-contain opacity-100 mix-blend-screen"
               />
-              {/* Inner glass orb container */}
-              <div className="absolute w-32 h-32 rounded-full bg-radial-gradient(circle, rgba(14,22,36,0.85) 0%, rgba(8,11,17,0.95) 100%) border border-white/10 flex flex-col items-center justify-center shadow-[0_0_40px_rgba(197,168,128,0.1)] overflow-hidden">
-                <div className="absolute inset-0 bg-radial-gradient(circle, rgba(197, 168, 128, 0.15) 0%, transparent 60%)" />
-                
-                {/* Active Waveform synchronized to scroll stages */}
-                <div className="flex items-center gap-1 z-10 h-6">
-                  {waveformHeights[stage as 0 | 1 | 2].map((height, i) => (
-                    <motion.span 
-                      key={i}
-                      animate={{ height: [height * 0.4, height, height * 0.4] }}
-                      transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.08, ease: "easeInOut" }}
-                      className="w-0.5 rounded-full bg-gold-base"
-                    />
-                  ))}
-                </div>
-                <span className="text-[8px] uppercase tracking-widest text-gold-base font-semibold mt-2.5 z-10">
-                  Concierge Live
-                </span>
-              </div>
             </div>
 
             {/* Conversation text bubble */}
